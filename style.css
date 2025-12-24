@@ -1,0 +1,169 @@
+:root {
+    --matcha-dark: #556B2F;
+    --matcha-medium: #8FBC8F;
+    --matcha-light: #E0F2E0;
+    --matcha-cream: #F5F5DC;
+    --ink-color: #444;
+    --toast-bg: rgba(85, 107, 47, 0.95);
+    /* Warna Kue */
+    --cake-creamy: #FFFDD0;
+    --cake-matcha: #A8C69F;
+    --cake-brown: #8B4513;
+}
+
+body {
+    margin: 0; padding: 0;
+    background-color: #f0f0f0;
+    font-family: 'Patrick Hand', cursive;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; overflow-x: hidden;
+    background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+}
+
+.notebook-container {
+    width: 90%; max-width: 600px; min-height: 80vh;
+    background-color: var(--matcha-light);
+    background-image: linear-gradient(#99cf99 1px, transparent 1px);
+    background-size: 100% 1.5em;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    padding: 40px 20px; position: relative;
+    border-radius: 5px; text-align: center; color: var(--ink-color);
+    overflow: hidden;
+}
+
+.holes {
+    position: absolute; left: 10px; top: 0; bottom: 0; width: 20px;
+    border-right: 2px solid rgba(0,0,0,0.1);
+}
+
+.hidden { display: none !important; }
+.active { display: block; animation: fadeIn 1s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Typography */
+.handwriting { font-size: 2.5rem; font-family: 'Indie Flower', cursive; color: var(--matcha-dark); }
+.handwriting-bold { font-size: 2rem; font-weight: bold; margin-bottom: 20px; }
+.handwriting-text { font-size: 1.2rem; line-height: 1.6em; text-align: left; padding: 0 20px; }
+.handwriting-sign { text-align: right; margin-top: 30px; font-style: italic; }
+.handwriting-small { font-size: 1.2rem; }
+
+.blink-border { animation: blinkBorder 2s infinite; }
+@keyframes blinkBorder {
+    0%, 100% { box-shadow: 0 0 5px var(--matcha-medium); }
+    50% { box-shadow: 0 0 20px var(--matcha-dark); scale: 1.05; }
+}
+
+/* --- CUSTOM SLIDER KELINCI --- */
+.slider-wrapper { margin: 20px 0; width: 100%; display: flex; justify-content: center; }
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 80%;
+    height: 10px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid var(--matcha-dark);
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-size="40">🐇</text></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-top: -20px;
+}
+
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+/* --- CSS KUE MATCHA --- */
+.cake-container {
+    position: relative; margin: 20px auto 0 auto; width: 100%;
+    height: 220px; display: flex; justify-content: center; align-items: flex-end;
+}
+.css-cake { position: relative; width: 200px; height: 150px; }
+.cake-top-layer, .cake-middle-layer, .cake-bottom-layer {
+    width: 100%; height: 50px; border-radius: 10px; position: absolute; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+.cake-top-layer { bottom: 100px; background-color: var(--cake-matcha); z-index: 3; width: 90%; left: 5%; }
+.cake-middle-layer { bottom: 50px; background-color: var(--cake-creamy); z-index: 2; width: 95%; left: 2.5%; }
+.cake-bottom-layer { bottom: 0; background-color: var(--cake-matcha); z-index: 1; }
+.matcha-powder { position: absolute; top: 5px; left: 10%; width: 80%; height: 10px; background: rgba(85, 107, 47, 0.2); border-radius: 50%; filter: blur(2px); }
+.cream-filling { position: absolute; top: 20px; left: 0; width: 100%; height: 10px; background: var(--cake-matcha); opacity: 0.5; }
+.candle { position: absolute; bottom: 145px; left: 50%; transform: translateX(-50%); z-index: 5; }
+.wax { width: 12px; height: 40px; background: radial-gradient(var(--cake-creamy), var(--matcha-light)); border-radius: 3px; border: 1px solid #e0e0e0; }
+.wick { width: 2px; height: 10px; background: #555; margin: 0 auto; }
+.flame {
+    width: 16px; height: 24px; background: orange; border-radius: 50% 50% 20% 20%;
+    position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 10px yellow, 0 0 20px red;
+    animation: flicker 0.8s infinite alternate ease-in-out;
+    opacity: 1; transition: opacity 0.8s ease-out;
+}
+.flame.padam { opacity: 0; }
+@keyframes flicker { 0% { transform: translateX(-50%) skewX(-2deg) scaleY(1); } 100% { transform: translateX(-50%) skewX(2deg) scaleY(1.1); } }
+.smoke { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 4rem; z-index: 10; pointer-events: none; }
+
+/* --- 3D CAROUSEL ANIMATION --- */
+.carousel-container {
+    perspective: 1000px; /* Memberikan efek kedalaman 3D */
+    width: 100%;
+    height: 250px; /* Tinggi area carousel */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    position: relative;
+    margin-top: 20px;
+}
+
+.carousel-track {
+    width: 140px; /* Lebar satu item foto */
+    height: 180px; /* Tinggi satu item foto */
+    position: relative;
+    transform-style: preserve-3d; /* Wajib untuk 3D */
+    animation: spin 20s infinite linear; /* Animasi putar terus menerus */
+}
+
+/* Saat mouse diarahkan, animasi berhenti supaya bisa dilihat jelas */
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.carousel-track img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    /* Backface visibility: hidden agar belakang foto tidak terlihat (opsional) */
+    backface-visibility: hidden; 
+}
+
+/* Keyframes untuk memutar Track 360 derajat */
+@keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* --- ELEMENT LAIN --- */
+.paper-note { background: #fff; padding: 20px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); transform: rotate(-2deg); margin: 20px auto; max-width: 90%; }
+.btn-matcha { background: var(--matcha-medium); border: 2px solid var(--matcha-dark); color: white; padding: 12px 25px; font-family: 'Patrick Hand', cursive; font-size: 1.3rem; border-radius: 30px; cursor: pointer; margin-top: 20px; transition: 0.3s; box-shadow: 0 4px #556B2F; }
+.btn-matcha:hover { background: var(--matcha-dark); box-shadow: 0 2px #556B2F; transform: translateY(2px); }
+.btn-matcha:active { box-shadow: 0 0 #556B2F; transform: translateY(4px); }
+.btn-red { background: #ff9999; border: 2px solid #cc0000; color: white; padding: 10px 20px; font-family: 'Patrick Hand', cursive; font-size: 1.2rem; border-radius: 20px; cursor: pointer; position: relative; }
+.polaroid-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+.polaroid { background: var(--matcha-cream); padding: 10px 10px 30px 10px; box-shadow: 3px 3px 8px rgba(0,0,0,0.2); width: 120px; transition: transform 0.3s; border: 1px solid #ddd; }
+.polaroid img { width: 100%; height: 120px; object-fit: cover; border: 1px solid #eee; }
+.caption { margin-top: 10px; font-size: 0.9rem; color: var(--matcha-dark); font-weight: bold; }
+.polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; }
+.toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background-color: var(--toast-bg); color: var(--matcha-cream); padding: 16px 32px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); font-family: 'Patrick Hand', cursive; font-size: 1.3rem; z-index: 9999; transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s; opacity: 0; text-align: center; min-width: 250px; border: 2px solid var(--matcha-light); }
+.toast.show { bottom: 50px; opacity: 1; }

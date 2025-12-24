@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Piya!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="bg-music" loop></audio>
+
+    <div class="notebook-container">
+        <div class="holes"></div> 
+        
+        <section id="intro" class="page active">
+            <h1 id="intro-title" class="handwriting">Loading...</h1>
+            <p id="intro-sub" class="handwriting-small">...</p>
+            <div class="starter-container" style="margin-top: 50px;">
+                <button id="btn-start" class="btn-matcha blink-border" onclick="startCelebration()"></button>
+            </div>
+        </section>
+
+        <section id="verification" class="page hidden">
+            <h2 id="verif-title" class="handwriting-bold"></h2>
+            <p id="verif-sub" class="handwriting-small"></p>
+            
+            <div id="verif-buttons" class="buttons-area">
+                <button id="btn-verif-yes" class="btn-matcha" onclick="confirmAge(true)"></button>
+                <button id="btn-verif-no" class="btn-red" onclick="showSlider()"></button>
+            </div>
+
+            <div id="slider-container" class="hidden" style="margin-top: 30px;">
+                <p id="slider-label" class="handwriting-small"></p>
+                
+                <h1 id="year-display" class="handwriting" style="font-size: 3rem;">2007</h1>
+                
+                <div class="slider-wrapper">
+                    <input type="range" id="year-slider" min="1997" max="2012" value="2007" oninput="updateSliderVal(this.value)">
+                </div>
+
+                <button id="btn-slider-go" class="btn-matcha" onclick="confirmAge(false)"></button>
+            </div>
+        </section>
+
+        <section id="cake-page" class="page hidden">
+            <h2 id="cake-title" class="handwriting-bold"></h2>
+            <p id="cake-msg" class="handwriting-small" style="transition: opacity 0.5s;"></p>
+            
+            <div class="cake-container">
+                <div class="css-cake">
+                    <div class="candle">
+                        <div id="cake-flame" class="flame"></div>
+                        <div class="wick"></div>
+                        <div class="wax"></div>
+                    </div>
+                    <div class="cake-top-layer">
+                        <div class="matcha-powder"></div>
+                    </div>
+                    <div class="cake-middle-layer">
+                        <div class="cream-filling"></div>
+                    </div>
+                    <div class="cake-bottom-layer"></div>
+                </div>
+                <div id="smoke-effect" class="smoke hidden">💨</div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button id="btn-blow" class="btn-matcha" onclick="blowCandle()"></button>
+                <button id="btn-to-letter" class="btn-matcha hidden" onclick="goToLetter()"></button>
+            </div>
+        </section>
+
+        <section id="letter" class="page hidden">
+            <div class="paper-note">
+                <h2 id="letter-title" class="handwriting-bold"></h2>
+                <p id="letter-content" class="handwriting-text"></p>
+                <p id="letter-sign" class="handwriting-sign"></p>
+                <button class="btn-matcha" onclick="nextPage('interaction')">Lanjut >></button>
+            </div>
+        </section>
+
+        <section id="interaction" class="page hidden">
+            <h2 id="question" class="handwriting-bold"></h2>
+            <div class="buttons-area">
+                <button id="btn-yes" class="btn-matcha" onclick="sayYes()"></button>
+                <button id="btn-no" class="btn-red" onmouseover="dodgeButton()" onclick="dodgeButton()"></button>
+            </div>
+        </section>
+
+        <section id="gallery" class="page hidden">
+            <h2 class="handwriting-bold">Kenangan Indah 📸</h2>
+            <p class="handwriting-small">Gallery Spesial Piya</p>
+            
+            <div id="polaroid-container" class="polaroid-wrapper"></div>
+            
+            <br>
+            
+            <h3 class="handwriting-small" style="margin-top: 30px;">More Memories...</h3>
+            <div class="carousel-container">
+                <div class="carousel-track" id="carousel-track">
+                    </div>
+            </div>
+
+            <br>
+            <p class="handwriting-small footer-note">Happy Birthday My Pyon Pyon! 🍵 ❤️</p>
+        </section>
+
+    </div>
+
+    <div id="toast-container" class="toast hidden">Pesan Toast</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

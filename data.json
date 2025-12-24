@@ -1,0 +1,54 @@
+{
+  "penerima": "Piya",
+  "panggilan_sayang": "My Pyon Pyon 🐇",
+  "musik": "sound/musikmu.mp3",
+  
+  "halaman_awal": {
+    "judul": "Happy Birthday!",
+    "subjudul": "Ada kejutan spesial buat kamu...",
+    "tombol_mulai": "Buka Kejutannya 🎁"
+  },
+
+  "halaman_verifikasi": {
+    "tanya": "Sebentar, konfirmasi dulu...",
+    "sub_tanya": "Apa bener kamu lahir tahun 2007?",
+    "tombol_benar": "Iya, bener 2007! ✅",
+    "tombol_salah": "Bukan, salah tahun ❌",
+    "label_slider": "Geser kelincinya ke tahun lahirmu:",
+    "tombol_lanjut_slider": "Lanjut (Umur {usia}) >>"
+  },
+
+  "halaman_kue": {
+    "judul": "Make a Wish! 🎂",
+    "ucapan_sebelum": "Sekarang tutup mata, ucapin harapanmu...",
+    "ucapan_sesudah": "Yeay! Apinya padam! 🕯️✨",
+    "tombol_tiup": "Tiup Lilinnya 🌬️",
+    "tombol_lanjut": "Baca Pesan Spesial 💌"
+  },
+
+  "surat": {
+    "judul_kertas": "Dearest Piya,",
+    "isi_pesan": "Selamat ulang tahun yang ke-{usia}! ✨<br><br>Wah, seneng banget bisa ngerayain hari spesial ini. Gak kerasa udah {usia} tahun ya.<br><br>Di umur {usia} ini, semoga Piya makin bersinar, makin happy, dan tetap jadi Oshi kesayanganku. Jangan lupa makan enak dan istirahat ya!",
+    "ttd": "Your Support System"
+  },
+
+  "interaksi": {
+    "tanya": "Gimana? Suka gak kejutannya?",
+    "tombol_ya": "Suka banget! 💚",
+    "tombol_lari": "Biasa aja 😝",
+    "pesan_ya": "Aaaa seneng dengernya! Lanjut liat kenangan yuk... 🥰",
+    "pesan_lari": "Ih kok gitu... harus bilang suka pokoknya!"
+  },
+
+  "galeri": [
+    { "src": "img/foto1.jpg", "caption": "Special Day" },
+    { "src": "img/foto2.jpg", "caption": "So Pretty" },
+    { "src": "img/foto3.jpg", "caption": "Matcha Girl 🍵" },
+    { "src": "img/foto4.jpg", "caption": "Memories ✨" }
+  ],
+
+  "foto_banyak": [
+    "img/foto1.jpg", "img/foto2.jpg", "img/foto3.jpg", "img/foto4.jpg",
+    "img/foto1.jpg", "img/foto2.jpg", "img/foto3.jpg", "img/foto4.jpg"
+  ]
+}
