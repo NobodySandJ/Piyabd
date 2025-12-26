@@ -2,14 +2,38 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HBD Piya!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐇</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&family=Dancing+Script&family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
+    <div id="preloader">
+        <div class="loader-content">
+            <i class="fas fa-birthday-cake fa-bounce" style="font-size: 3rem; color: #556B2F;"></i>
+            <p class="handwriting">Loading Surprise...</p>
+        </div>
+    </div>
+
+    <div id="floating-bg"></div>
     <audio id="bg-music" loop></audio>
+
+    <div id="music-widget" class="music-widget hidden" onclick="toggleMusicPlay()">
+        <div class="vinyl-container">
+             <i class="fas fa-compact-disc spinning-vinyl"></i>
+            <div class="floating-notes">
+                <i class="fas fa-music note-1"></i>
+                <i class="fas fa-music note-2"></i>
+            </div>
+        </div>
+        <span class="widget-text handwriting-small">Playing ♪</span>
+    </div>
 
     <div class="notebook-container">
         <div class="holes"></div> 
@@ -25,50 +49,77 @@
         <section id="verification" class="page hidden">
             <h2 id="verif-title" class="handwriting-bold"></h2>
             <p id="verif-sub" class="handwriting-small"></p>
-            
             <div id="verif-buttons" class="buttons-area">
                 <button id="btn-verif-yes" class="btn-matcha" onclick="confirmAge(true)"></button>
                 <button id="btn-verif-no" class="btn-red" onclick="showSlider()"></button>
             </div>
-
             <div id="slider-container" class="hidden" style="margin-top: 30px;">
                 <p id="slider-label" class="handwriting-small"></p>
-                
                 <h1 id="year-display" class="handwriting" style="font-size: 3rem;">2007</h1>
-                
                 <div class="slider-wrapper">
                     <input type="range" id="year-slider" min="1997" max="2012" value="2007" oninput="updateSliderVal(this.value)">
                 </div>
-
-                <button id="btn-slider-go" class="btn-matcha" onclick="confirmAge(false)"></button>
+                <button id="btn-slider-go" class="btn-next-fancy" onclick="confirmAge(false)">
+                    <span id="slider-btn-text">Lanjut</span> <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </section>
 
         <section id="cake-page" class="page hidden">
-            <h2 id="cake-title" class="handwriting-bold"></h2>
-            <p id="cake-msg" class="handwriting-small" style="transition: opacity 0.5s;"></p>
-            
-            <div class="cake-container">
-                <div class="css-cake">
-                    <div class="candle">
-                        <div id="cake-flame" class="flame"></div>
-                        <div class="wick"></div>
-                        <div class="wax"></div>
+            <h2 id="cake-title" class="handwriting-bold">Make a Wish!</h2>
+
+            <div id="mode-selection" class="mode-selection-container">
+                <p class="handwriting-small" style="margin-bottom: 20px;">Mau tiup lilin pake gaya apa nih?</p>
+                <div class="mode-cards">
+                    <div class="mode-card" onclick="selectBlowMode('mic')">
+                        <i class="fas fa-microphone-alt"></i>
+                        <span>Tiup Mic 🎤</span>
+                        <small>Tiup napas ke HP/Laptop</small>
                     </div>
-                    <div class="cake-top-layer">
-                        <div class="matcha-powder"></div>
+                    <div class="mode-card" onclick="selectBlowMode('click')">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <span>Klik Layar 👆</span>
+                        <small>Pencet tombol aja deh</small>
                     </div>
-                    <div class="cake-middle-layer">
-                        <div class="cream-filling"></div>
-                    </div>
-                    <div class="cake-bottom-layer"></div>
                 </div>
-                <div id="smoke-effect" class="smoke hidden">💨</div>
             </div>
 
-            <div style="margin-top: 30px;">
-                <button id="btn-blow" class="btn-matcha" onclick="blowCandle()"></button>
-                <button id="btn-to-letter" class="btn-matcha hidden" onclick="goToLetter()"></button>
+            <div id="cake-interaction-area" class="hidden">
+                <p id="cake-msg" class="handwriting-small" style="transition: opacity 0.5s; margin-top: 10px;"></p>
+                
+                <div class="cake-container">
+                    <div class="css-cake">
+                        <div class="candle">
+                            <div id="cake-flame" class="flame"></div>
+                            <div class="wick"></div>
+                            <div class="wax"></div>
+                        </div>
+                        <div id="smoke-container" class="smoke-area"></div>
+                        <div class="cake-top-layer"><div class="matcha-powder"></div></div>
+                        <div class="cake-middle-layer"><div class="cream-filling"></div></div>
+                        <div class="cake-bottom-layer"></div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; min-height: 80px;">
+                    <button id="btn-blow" class="btn-magic hidden" onclick="blowCandleManual()">
+                        <i class="fas fa-wind"></i> Fiuuhhh! 🌬️
+                    </button>
+                    
+                    <div id="mic-indicator" class="hidden">
+                        <p class="handwriting-small" style="margin-bottom:5px;">Ayo tiup yang kenceeeng! Fiuuh! 🌬️</p>
+                        <div class="mic-bar-wrapper">
+                            <div id="mic-level" class="mic-bar"></div>
+                        </div>
+                        <button onclick="selectBlowMode('click')" style="background:none; border:none; color:#556B2F; text-decoration:underline; font-family:'Patrick Hand'; cursor:pointer; margin-top:5px; font-size: 0.9rem;">
+                            (Ganti ke Mode Klik)
+                        </button>
+                    </div>
+
+                    <button id="btn-to-letter" class="btn-next-fancy hidden" onclick="goToLetter()">
+                        Baca Surat Spesial <i class="fas fa-envelope-open-text"></i>
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -77,40 +128,145 @@
                 <h2 id="letter-title" class="handwriting-bold"></h2>
                 <p id="letter-content" class="handwriting-text"></p>
                 <p id="letter-sign" class="handwriting-sign"></p>
-                <button class="btn-matcha" onclick="nextPage('interaction')">Lanjut >></button>
+                <button class="btn-next-fancy" onclick="nextPage('interaction')">
+                    Lanjut <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </section>
 
         <section id="interaction" class="page hidden">
             <h2 id="question" class="handwriting-bold"></h2>
-            <div class="buttons-area">
-                <button id="btn-yes" class="btn-matcha" onclick="sayYes()"></button>
-                <button id="btn-no" class="btn-red" onmouseover="dodgeButton()" onclick="dodgeButton()"></button>
+            <div id="runaway-container" class="buttons-area" style="position: relative; height: 250px; border: 2px dashed rgba(85, 107, 47, 0.2); border-radius: 10px; overflow: hidden;">
+                <button id="btn-yes" class="btn-matcha" onclick="sayYes()" style="margin-top: 90px; z-index: 5;"></button>
+                <button id="btn-no" class="btn-red" style="position: absolute; top: 90px; left: 60%; transition: all 0.1s ease;" onmouseover="dodgeButton()" onclick="dodgeButton()"></button>
             </div>
         </section>
 
         <section id="gallery" class="page hidden">
             <h2 class="handwriting-bold">Kenangan Indah 📸</h2>
             <p class="handwriting-small">Gallery Spesial Piya</p>
-            
             <div id="polaroid-container" class="polaroid-wrapper"></div>
+            <h3 class="handwriting-small" style="margin-top: 40px;">Swipe Memories... ↔️</h3>
+            <div class="carousel-container" id="carousel-area">
+                <div class="carousel-track" id="carousel-track"></div>
+            </div>
+            <div style="margin-top: 50px; margin-bottom: 20px;">
+                <button class="btn-next-fancy" onclick="nextPage('photobooth-page')">
+                    Masuk ke Photobooth <i class="fas fa-camera-retro"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="photobooth-page" class="page hidden">
+            <h2 class="handwriting-bold">✨ Photobooth ✨</h2>
             
-            <br>
-            
-            <h3 class="handwriting-small" style="margin-top: 30px;">More Memories...</h3>
-            <div class="carousel-container">
-                <div class="carousel-track" id="carousel-track">
-                    </div>
+            <div id="static-mode-ui">
+                <p class="handwriting-small">Ada foto editan spesial nih!</p>
+                <div class="polaroid-static-wrapper">
+                    <img id="static-pb-img" src="" alt="Photobooth Static" style="width:100%; border-radius: 5px;">
+                </div>
+                <br>
+                <button class="btn-matcha" onclick="printStaticPhoto()">
+                    <i class="fas fa-print"></i> Cetak Foto Ini
+                </button>
+
+                <div style="margin-top: 30px;">
+                    <p class="handwriting-small" style="margin-bottom: 5px;">Atau mau foto bareng sekarang?</p>
+                    <button class="btn-next-fancy" onclick="openLivePhotobooth()">
+                        Yuk Selfie Dulu 📸
+                    </button>
+                </div>
             </div>
 
-            <br>
-            <p class="handwriting-small footer-note">Happy Birthday My Pyon Pyon! 🍵 ❤️</p>
+            <div id="live-mode-ui" class="hidden">
+                <p class="handwriting-small" style="margin-bottom: 5px;">Rapihin rambut dulu... 3, 2, 1! ✨</p>
+                
+                <div class="camera-frame">
+                    <video id="camera-feed" autoplay playsinline class="hidden"></video>
+                    <div id="countdown-overlay" class="hidden">
+                        <span id="countdown-text">3</span>
+                    </div>
+                    <canvas id="photo-canvas" class="hidden"></canvas>
+                    <div id="camera-placeholder" class="camera-placeholder">
+                        <i class="fas fa-camera" style="font-size: 2rem;"></i>
+                        <p>Klik tombol Start Camera</p>
+                    </div>
+                </div>
+
+                <div class="printer-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+                    <button id="btn-start-cam" class="btn-matcha" onclick="startCamera()">📸 Buka Kamera</button>
+                    <button id="btn-take-pic" class="btn-matcha hidden" onclick="startPhotoSequence()">✌️ Mulai Foto (4x)</button>
+                    <button id="btn-retake" class="btn-red hidden" onclick="resetCamera()">Ulang</button>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <button id="btn-back-static" onclick="closeLivePhotobooth()" style="background:none; border:none; color: #556B2F; font-family:'Patrick Hand'; cursor:pointer; text-decoration: underline;">
+                        << Kembali
+                    </button>
+                </div>
+            </div>
+
+            <div id="preview-mode-ui" class="hidden">
+                <h3 class="handwriting-bold" style="margin-bottom: 10px;">✨ Cakep! Hias Dulu Yuk ✨</h3>
+                
+                <div class="preview-wrapper">
+                    <img id="preview-strip-img" src="" alt="Preview Strip">
+                </div>
+
+                <div class="edit-controls">
+                    <p class="control-label" style="margin-top: 0;">Tulis Pesanmu:</p>
+                    <div class="input-row">
+                        <input type="text" id="custom-header" placeholder="Tulis Judul (ex: Happy Day)" value="HBD Piya - 19th" oninput="updatePreview()" maxlength="20">
+                        <input type="text" id="custom-footer" placeholder="Pesan Bawah (ex: I Love U)" value="Love You!" oninput="updatePreview()" maxlength="25">
+                    </div>
+
+                    <p class="control-label">Pilih Tema:</p>
+                    <div class="button-group" id="theme-group">
+                        <button class="option-btn active" onclick="selectTheme('mixed', this)">🎨 Campur</button>
+                        <button class="option-btn" onclick="selectTheme('love', this)">💚 Love</button>
+                        <button class="option-btn" onclick="selectTheme('bunny', this)">🐇 Bunny</button>
+                    </div>
+
+                    <p class="control-label">Pilih Font:</p>
+                    <div class="button-group" id="font-group">
+                        <button class="option-btn" style="font-family: 'Courier Prime', monospace;" onclick="selectFont('Courier New', this)">Retro</button>
+                        <button class="option-btn active" style="font-family: 'Patrick Hand', cursive;" onclick="selectFont('Patrick Hand', this)">Hand</button>
+                        <button class="option-btn" style="font-family: 'Dancing Script', cursive;" onclick="selectFont('Dancing Script', this)">Script</button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-red" onclick="resetCamera()">🔄 Ulang</button>
+                    <button class="btn-matcha" onclick="finalizeAndPrint()">🖨️ Cetak</button>
+                </div>
+            </div>
+
+            <div class="printer-wrapper hidden" id="printer-animation-area">
+                <div class="printer-head">
+                    <div class="printer-slot"></div>
+                    <div class="printer-light"></div>
+                </div>
+                <div id="photobooth-strip" class="photo-paper"></div>
+            </div>
+
+            <div id="post-print-options" class="hidden" style="margin-top: 30px; padding-bottom: 50px; border-top: 2px dashed #8FBC8F; padding-top: 20px;">
+                <p class="handwriting-small">Udah kesimpen otomatis ya! ✨</p>
+                
+                <button class="btn-magic" onclick="openLivePhotobooth()">
+                    📸 Buat Lagi
+                </button>
+                
+                <br><br>
+                <a id="btn-download" class="btn-download-fancy" href="#" style="font-size: 1rem; padding: 10px 20px;">
+                    <i class="fas fa-download"></i> Download Ulang
+                </a>
+            </div>
+            
         </section>
 
     </div>
 
     <div id="toast-container" class="toast hidden">Pesan Toast</div>
-
     <script src="script.js"></script>
 </body>
 </html>
