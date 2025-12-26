@@ -2,13 +2,11 @@
   "penerima": "Piya",
   "panggilan_sayang": "My Pyon Pyon 🐇",
   "musik": "sound/music.mp3",
-  
   "halaman_awal": {
     "judul": "Happy Birthday! 🎉",
     "subjudul": "Cieee yang nambah tua! Ada sesuatu nih buat kamu...",
     "tombol_mulai": "Apa tuh? Buka dong! 🎁"
   },
-
   "halaman_verifikasi": {
     "tanya": "Eits, Security Check! 👮‍♂️",
     "sub_tanya": "Yakin kamu Piya yang lahir tahun 2007?",
@@ -17,7 +15,6 @@
     "label_slider": "Coba geser kelincinya ke tahun lahirmu:",
     "tombol_lanjut_slider": "Gass Lanjut (Umur {usia}) >>"
   },
-
   "halaman_kue": {
     "judul": "Make a Wish! 🎂",
     "ucapan_sebelum": "Tarik napas, pejamin mata, terus minta doa yang banyaaak... ✨",
@@ -25,13 +22,11 @@
     "tombol_tiup": "Fiuuhhh! 🌬️",
     "tombol_lanjut": "Ada Surat Buatmu 💌"
   },
-
   "surat": {
     "judul_kertas": "Dear Piya,",
     "isi_pesan": "Happy Level Up yang ke-{usia}! 🥳<br><br>Gak kerasa ya udah {usia} tahun. Makasih banget lho udah lahir ke dunia dan bertahan sampai sekarang. Aku bangga banget sama progres kamu.<br><br>Semoga di chapter baru ini, hari-harimu makin seru, rezekinya lancar, dan tetep jadi 'My Pyon Pyon' yang gemes. Sehat terus ya! Love you! 💚",
     "ttd": "Your #1 Fan"
   },
-
   "interaksi": {
     "tanya": "Jujur... Suka nggak sama web-nya? 👉👈",
     "tombol_ya": "Suka banget parah! 😭💚",
@@ -39,22 +34,48 @@
     "pesan_ya": "Aaaa syukurlah kalau suka! Yuk liat kenangan kita... 🥰",
     "pesan_lari": "Eits! Gak boleh tombol itu! Harus suka! 😤"
   },
-
   "galeri": [
-    { "src": "img/foto1.jpg", "caption": "Hari Spesial ✨" },
-    { "src": "img/foto2.jpg", "caption": "Cantik Banget sih" },
-    { "src": "img/foto3.jpg", "caption": "Matcha Girl 🍵" },
-    { "src": "img/foto4.jpg", "caption": "Memories ❤️" }
+    {
+      "src": "img/debut.webp",
+      "caption": "Debut RB 🎉"
+    },
+    {
+      "src": "img/ishou.webp",
+      "caption": "Ishou baru 🎉"
+    },
+    {
+      "src": "img/lama.webp",
+      "caption": "ishou awal RB 🎉"
+    },
+    {
+      "src": "img/piya.webp",
+      "caption": "long hair :v"
+    }
   ],
-
   "photobooth": {
     "src": "img/pb.webp",
     "tombol_cetak": "Cetak Foto Ini 🖨️",
     "tombol_download": "Simpan Buat Kenang-kenangan ✨"
   },
-
   "foto_banyak": [
-    "img/foto1.jpg", "img/foto2.jpg", "img/foto3.jpg", "img/foto4.jpg",
-    "img/foto1.jpg", "img/foto2.jpg", "img/foto3.jpg", "img/foto4.jpg"
+    "img/foto (1).webp",
+    "img/foto (2).webp",
+    "img/foto (3).webp",
+    "img/foto (4).webp",
+    "img/foto (5).webp",
+    "img/foto (8).webp",
+    "img/foto (9).webp",
+    "img/foto (10).webp",
+    "img/foto (11).webp",
+    "img/foto (12).webp",
+    "img/foto (13).webp",
+    "img/foto (14).webp",
+    "img/foto (15).webp",
+    "img/foto (16).webp",
+    "img/foto (17).webp",
+    "img/foto (18).webp",
+    "img/foto (19).webp",
+    "img/foto (20).webp",
+    "img/foto (21).webp"
   ]
 }

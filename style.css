@@ -82,53 +82,18 @@ input[type=range]::-webkit-slider-thumb {
     background-repeat: no-repeat; background-position: center; cursor: pointer; transition: transform 0.2s; margin-top: -20px;
 }
 
-/* --- MODE SELECTION CARDS (NEW) --- */
-.mode-selection-container {
-    animation: fadeIn 0.8s;
-}
-.mode-cards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
+/* --- MODE SELECTION CARDS --- */
+.mode-selection-container { animation: fadeIn 0.8s; }
+.mode-cards { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
 .mode-card {
-    background: #fff;
-    border: 2px solid var(--matcha-medium);
-    border-radius: 15px;
-    padding: 20px;
-    width: 120px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 5px 15px rgba(85, 107, 47, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    background: #fff; border: 2px solid var(--matcha-medium); border-radius: 15px; padding: 20px; width: 120px; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 5px 15px rgba(85, 107, 47, 0.1);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
-.mode-card:hover {
-    transform: translateY(-5px) scale(1.05);
-    border-color: var(--matcha-dark);
-    background: var(--matcha-light);
-    box-shadow: 0 10px 20px rgba(85, 107, 47, 0.2);
-}
-.mode-card i {
-    font-size: 2.5rem;
-    color: var(--matcha-dark);
-}
-.mode-card span {
-    font-family: 'Patrick Hand', cursive;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--matcha-dark);
-}
-.mode-card small {
-    font-size: 0.8rem;
-    color: #666;
-    line-height: 1.2;
-}
-
+.mode-card:hover { transform: translateY(-5px) scale(1.05); border-color: var(--matcha-dark); background: var(--matcha-light); box-shadow: 0 10px 20px rgba(85, 107, 47, 0.2); }
+.mode-card i { font-size: 2.5rem; color: var(--matcha-dark); }
+.mode-card span { font-family: 'Patrick Hand', cursive; font-size: 1.2rem; font-weight: bold; color: var(--matcha-dark); }
+.mode-card small { font-size: 0.8rem; color: #666; line-height: 1.2; }
 
 /* CAKE */
 .cake-container { position: relative; margin: 20px auto 0 auto; width: 100%; height: 220px; display: flex; justify-content: center; align-items: flex-end; }
@@ -194,15 +159,54 @@ input[type=range]::-webkit-slider-thumb {
     text-decoration: none; font-family: 'Patrick Hand', cursive; font-size: 1.5rem; box-shadow: 0 5px 15px rgba(85, 107, 47, 0.4); border: 3px solid white; cursor: pointer;
 }
 
-/* POLAROID & CAROUSEL */
-.polaroid-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
-.polaroid { background: var(--matcha-cream); padding: 10px 10px 30px 10px; box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); width: 120px; transition: transform 0.3s; border: 1px solid #ddd; }
-.polaroid img { width: 100%; height: 120px; object-fit: cover; border: 1px solid #eee; }
-.caption { margin-top: 10px; font-size: 0.9rem; color: var(--matcha-dark); font-weight: bold; }
-.polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; }
-.carousel-container { perspective: 1000px; width: 100%; height: 250px; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; margin-top: 20px; }
-.carousel-track { width: 140px; height: 180px; position: relative; transform-style: preserve-3d; transition: transform 0.5s ease-out; }
-.carousel-track img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); backface-visibility: hidden; }
+/* === POLAROID & CAROUSEL (UPDATED: FIXED SIZE) === */
+.polaroid-wrapper { 
+    display: flex; flex-wrap: wrap; justify-content: center; 
+    gap: 25px;
+    margin-top: 30px; 
+}
+.polaroid { 
+    background: var(--matcha-cream); 
+    padding: 12px 12px 40px 12px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); 
+    width: 160px;
+    transition: transform 0.3s; 
+    border: 1px solid #ddd; 
+    border-radius: 4px;
+}
+.polaroid img { 
+    width: 100%; 
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid #eee; 
+}
+.caption { margin-top: 15px; font-size: 1rem; color: var(--matcha-dark); font-weight: bold; }
+.polaroid:hover { transform: scale(1.15) rotate(0deg) !important; z-index: 20; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+
+/* CAROUSEL 3D (UKURAN DIPERKECIL AGAR FIT) */
+.carousel-container { 
+    perspective: 1000px; /* Depth 3D standar */
+    width: 100%; 
+    height: 300px; /* Tinggi container disesuaikan */
+    display: flex; justify-content: center; align-items: center; 
+    overflow: hidden; 
+    position: relative; 
+    margin-top: 20px; 
+}
+
+.carousel-track { 
+    width: 120px; /* LEBAR KARTU KECIL (sebelumnya 180) */
+    height: 170px; /* TINGGI KARTU KECIL (sebelumnya 260) */
+    position: relative; 
+    transform-style: preserve-3d; 
+    transition: transform 0.1s; /* Lebih responsif */
+}
+
+.carousel-track img { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    object-fit: cover; border-radius: 8px; border: 3px solid white; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
 
 /* PHOTOBOOTH & PRINTER */
 .polaroid-static-wrapper { background: #fff; padding: 15px 15px 50px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 240px; margin: 10px auto; transform: rotate(-3deg); border: 1px solid #ddd; }
@@ -247,48 +251,16 @@ input[type=range]::-webkit-slider-thumb {
 .note-2 { right: 0px; animation: floatNote 2.5s ease-out 1.2s infinite; }
 @keyframes floatNote { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 1; } 100% { transform: translateY(-40px) rotate(30deg); opacity: 0; } }
 
-/* --- PREVIEW MODE STYLES (UPDATED) --- */
-#preview-mode-ui {
-    max-width: 100%;
-    animation: fadeIn 0.5s ease-out;
-}
-
-/* Container Preview */
+/* --- PREVIEW MODE STYLES --- */
+#preview-mode-ui { max-width: 100%; animation: fadeIn 0.5s ease-out; }
 .preview-wrapper {
-    background: #e8f5e9;
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    border: 2px dashed var(--matcha-medium);
-    
-    /* PERBAIKAN: Full width & auto height agar bisa discroll */
-    width: 100%; 
-    height: auto; 
-    overflow: visible; 
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
+    background: #e8f5e9; padding: 20px; border-radius: 15px; margin-bottom: 20px;
+    border: 2px dashed var(--matcha-medium); width: 100%; height: auto; 
+    overflow: visible; box-sizing: border-box; display: flex; justify-content: center;
 }
+#preview-strip-img { width: 100%; max-width: 450px; height: auto; display: block; border-radius: 2px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); border: 8px solid white; }
 
-#preview-strip-img {
-    width: 100%;
-    max-width: 450px; /* Batas max di desktop */
-    height: auto;
-    display: block;
-    border-radius: 2px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
-    border: 8px solid white; 
-}
-
-/* Edit Controls */
-.edit-controls {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px 15px;
-    border-radius: 20px;
-    border: 2px solid var(--matcha-light);
-    box-shadow: 0 5px 20px rgba(85, 107, 47, 0.1);
-}
-
+.edit-controls { background: rgba(255, 255, 255, 0.9); padding: 20px 15px; border-radius: 20px; border: 2px solid var(--matcha-light); box-shadow: 0 5px 20px rgba(85, 107, 47, 0.1); }
 .input-row { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
 .input-row input {
     width: 100%; padding: 12px 15px; border: 2px solid var(--matcha-light);

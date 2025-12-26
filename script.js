@@ -202,28 +202,72 @@ function dodgeButton() {
 }
 function sayYes() { showToast(data.interaksi.pesan_ya); setTimeout(() => nextPage('gallery'), 2000) }
 
+// === FIXED LOAD GALLERY (SUPPORT MANY PHOTOS WITHOUT ZOOM) ===
 function loadGallery() { 
     const container = document.getElementById('polaroid-container'); container.innerHTML = ''; 
+    
+    // 1. Render Polaroid Biasa
     data.galeri.forEach((item, index) => { 
-        const div = document.createElement('div'); div.classList.add('polaroid'); div.style.animation = `fadeIn 0.8s ease-out ${index * 0.2}s backwards`; 
+        const div = document.createElement('div'); div.classList.add('polaroid'); 
+        div.style.animation = `fadeIn 0.8s ease-out ${index * 0.2}s backwards`; 
         div.style.transform = `rotate(${Math.floor(Math.random() * 20) - 10}deg)`; 
         div.innerHTML = `<img src="${item.src}"><div class="caption">${item.caption}</div>`; container.appendChild(div) 
     }); 
+
+    // 2. Render Carousel 3D (Fixed Size Logic)
     const track = document.getElementById('carousel-track'); track.innerHTML = ''; 
+    
     let photos = (data.foto_banyak && data.foto_banyak.length > 0) ? data.foto_banyak : data.galeri.map(g => g.src); 
-    while (photos.length < 8) photos = photos.concat(photos); 
-    const radius = 250; const angleStep = 360 / photos.length; 
+    while (photos.length < 12) photos = photos.concat(photos); 
+    
+    // RUMUS BARU: Gunakan lebar kartu 120px + spasi 20px = 140px
+    let radius = (photos.length * 140) / (2 * Math.PI);
+    
+    const angleStep = 360 / photos.length; 
     photos.forEach((src, index) => { 
         const img = document.createElement('img'); img.src = src; 
-        img.style.transform = `rotateY(${index * angleStep}deg) translateZ(${radius}px)`; track.appendChild(img) 
+        img.style.transform = `rotateY(${index * angleStep}deg) translateZ(${radius}px)`; 
+        track.appendChild(img);
     });
-    // Auto Rotate
-    let currAngle = 0; let interval;
-    const carouselArea = document.getElementById('carousel-area'); let startX = 0; let isDragging = false;
-    carouselArea.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; clearInterval(interval); });
-    carouselArea.addEventListener('touchmove', (e) => { if(!isDragging) return; const diff = startX - e.touches[0].clientX; currAngle -= diff * 0.2; track.style.transform = `rotateY(${currAngle}deg)`; startX = e.touches[0].clientX; });
-    carouselArea.addEventListener('touchend', () => { isDragging = false; startAutoSpin(); });
-    function startAutoSpin() { clearInterval(interval); interval = setInterval(() => { currAngle -= 0.2; track.style.transform = `rotateY(${currAngle}deg)`; }, 20); }
+
+    // ZOOM OUT LOGIC: Dorong seluruh track ke belakang sejauh radius
+    let currAngle = 0; 
+    let autoRotate;
+    const carouselArea = document.getElementById('carousel-area'); 
+    let startX = 0; 
+    let isDragging = false;
+    
+    // Set posisi awal mundur
+    track.style.transform = `translateZ(-${radius}px) rotateY(0deg)`;
+
+    carouselArea.addEventListener('touchstart', (e) => { 
+        startX = e.touches[0].clientX; 
+        isDragging = true; 
+        clearInterval(autoRotate); 
+    });
+    
+    carouselArea.addEventListener('touchmove', (e) => { 
+        if(!isDragging) return; 
+        const diff = startX - e.touches[0].clientX; 
+        currAngle -= diff * 0.5; 
+        // Tetap pertahankan translateZ negatif
+        track.style.transform = `translateZ(-${radius}px) rotateY(${currAngle}deg)`; 
+        startX = e.touches[0].clientX; 
+    });
+    
+    carouselArea.addEventListener('touchend', () => { 
+        isDragging = false; 
+        startAutoSpin(); 
+    });
+    
+    function startAutoSpin() { 
+        clearInterval(autoRotate); 
+        autoRotate = setInterval(() => { 
+            currAngle -= 0.2; 
+            track.style.transform = `translateZ(-${radius}px) rotateY(${currAngle}deg)`; 
+        }, 20); 
+    }
+    
     startAutoSpin();
 }
 
